@@ -5,14 +5,14 @@ export default class TeamButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teamName : props.name
+      name : props.name
     }
   }
   render() {
-    return (<div>{this.state.teamName}</div>);
+    return (<div>{this.state.name}</div>);
   }
 }
 
 TeamButton.propTypes = {
-  name: PropTypes.string
+  name: PropTypes.string.isRequired
 };

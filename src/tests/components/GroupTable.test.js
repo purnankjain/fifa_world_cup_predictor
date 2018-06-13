@@ -4,17 +4,20 @@ import GroupTable from '../../components/GroupTable'
 import TeamButton from '../../components/TeamButton';
 
 describe('GroupTable component test', () => {
-  it('it should render multiple teamButtons in correct order', () => {
+  it('should match snapshot', () => {
     var teams = ['India', 'Pakistan', 'Sri Lanka'];
-    var expectedTeam1 = renderer.create(<TeamButton name={teams[0]} />).toJSON();
-    var expectedTeam2 = renderer.create(<TeamButton name={teams[1]} />).toJSON();
-    var expectedTeam3 = renderer.create(<TeamButton name={teams[2]} />).toJSON();
+    var groupName = "Group A";
+    var rendered = renderer.create(<GroupTable name={groupName} teams={teams}/>).toJSON();
 
-    var rendered = renderer.create(<GroupTable teams={teams}/>).toJSON();
+    expect(rendered).toMatchSnapshot();
+  });
 
-    expect(rendered.children.length).toEqual(teams.length);
-    expect(rendered.children[0]).toEqual(expectedTeam1);
-    expect(rendered.children[1]).toEqual(expectedTeam2);
-    expect(rendered.children[2]).toEqual(expectedTeam3);
+  it('should render multiple teamButtons', () => {
+    var teams = ['India', 'Pakistan', 'Sri Lanka'];
+    var groupName = "Group A";
+
+    var rendered = renderer.create(<GroupTable name={groupName} teams={teams}/>).root;
+
+    expect(rendered.findAllByType(TeamButton).length).toEqual(teams.length);
   });
 });

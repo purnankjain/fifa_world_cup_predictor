@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GroupTable component test should match snapshot 1`] = `
+<div>
+  <h3>
+    Group A
+  </h3>
+  <div>
+    India
+  </div>
+  <div>
+    Pakistan
+  </div>
+  <div>
+    Sri Lanka
+  </div>
+</div>
+`;
