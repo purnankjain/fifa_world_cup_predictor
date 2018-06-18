@@ -5,13 +5,22 @@ exports[`GroupTable component test should match snapshot 1`] = `
   <h3>
     Group A
   </h3>
-  <div>
+  <div
+    className=""
+    onClick={[Function]}
+  >
     India
   </div>
-  <div>
+  <div
+    className=""
+    onClick={[Function]}
+  >
     Pakistan
   </div>
-  <div>
+  <div
+    className=""
+    onClick={[Function]}
+  >
     Sri Lanka
   </div>
 </div>
