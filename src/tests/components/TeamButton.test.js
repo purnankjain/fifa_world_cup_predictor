@@ -7,13 +7,13 @@ import TeamButton from '../../components/TeamButton';
 describe('Team Button tests', () => {
   it('should render a box with team name', () => {
     var teamName = "India";
-    var rendered = renderer.create(<TeamButton name={teamName}/>).root;
+    var rendered = renderer.create(<TeamButton name={teamName} winnerCallback = {() => {}}/>).root;
     expect(rendered.findByType('div').children[0]).toEqual(teamName);
   });
   it('should be clickable to set as team as group winner and back', () => {
     var teamName = 'India';
-    var teamButtonWinner = TestUtils.renderIntoDocument(<TeamButton name={teamName}/>);
-    var teamButtonFallback = TestUtils.renderIntoDocument(<TeamButton name={teamName}/>);
+    var teamButtonWinner = TestUtils.renderIntoDocument(<TeamButton name={teamName} winnerCallback = {() => {}}/>);
+    var teamButtonFallback = TestUtils.renderIntoDocument(<TeamButton name={teamName} winnerCallback = {() => {}}/>);
     var teamButtonWinnerNode = ReactDOM.findDOMNode(teamButtonWinner);
     var teamButtonFallbackNode = ReactDOM.findDOMNode(teamButtonFallback);
 
