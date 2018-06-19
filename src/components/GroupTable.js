@@ -6,24 +6,24 @@ export default class GroupTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name : props.name,
-      teams : props.teams,
-      groupWinner : '',
-      winnerRef : null
+      groupWinner : ''
     };
-    this.updateGroupWinner = this.updateGroupWinner.bind(this);
+    this.setGroupWinner = this.setGroupWinner.bind(this);
+    this.rollbackGroupWinner = this.rollbackGroupWinner.bind(this);
   }
-  updateGroupWinner(winner, ref, winnerClassName) {
-    if(this.state.winnerRef !== null) {
-      this.state.winnerRef.current.classList.remove(winnerClassName); 
-    }
-    ref.current.classList.add(winnerClassName);
-    this.setState({ groupWinner: winner, winnerRef: ref });
+  setGroupWinner(e) {
+    this.setState({ groupWinner: e.target.innerHTML });
+  }
+  rollbackGroupWinner() {
+    this.setState({ groupWinner: '' });
+  }
+  isTeamWinner(teamName) {
+    return teamName === this.state.groupWinner;
   }
   render() {
-    var teamButtons = this.state.teams.map((team, index) => <TeamButton name={team} key={index} winnerCallback = {this.updateGroupWinner} />);
+    var teamButtons = this.props.teams.map((team, index) => <TeamButton name={team} key={index} winnerCallback = {this.setGroupWinner} rollbackWinnerCallback={this.rollbackGroupWinner} isWinner={this.isTeamWinner(team)}/>);
     return (<div>
-      <h3>{this.state.name}</h3>
+      <h3>{this.props.name}</h3>
       {teamButtons}
       </div>)
   }

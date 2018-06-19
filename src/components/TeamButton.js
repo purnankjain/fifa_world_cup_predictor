@@ -5,27 +5,27 @@ import './../styles/css/teamButton.css';
 export default class TeamButton extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: props.name,
-      winnerCallback: props.winnerCallback,
-      winner: false
-    }
     this.setWinner = this.setWinner.bind(this);
-    this.buttonRef = React.createRef();
   }
 
   setWinner(e) {
-    this.setState({winner : !this.state.winner});
-    this.state.winnerCallback(this.state.winner, this.buttonRef, 'winner');
+    if(!this.props.isWinner) {
+      this.props.winnerCallback(e);
+    }
+    else {
+      this.props.rollbackWinnerCallback(e);
+    }
   }
 
   render() {
-    var styleClass = this.state.winner ? 'winner' : '';
-    return (<div onClick={this.setWinner} className={styleClass} ref={this.buttonRef}>{this.state.name}</div>);
+    var styleClass = this.props.isWinner ? 'winner' : '';
+    return (<div onClick={this.setWinner} className={styleClass} >{this.props.name}</div>);
   }
 }
 
 TeamButton.propTypes = {
   name: PropTypes.string.isRequired,
-  winnerCallback: PropTypes.func.isRequired
+  winnerCallback: PropTypes.func.isRequired,
+  rollbackWinnerCallback: PropTypes.func.isRequired,
+  isWinner: PropTypes.bool
 };
