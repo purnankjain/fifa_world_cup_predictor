@@ -25,7 +25,12 @@ export default class TeamButton extends Component {
 
 TeamButton.propTypes = {
   name: PropTypes.string.isRequired,
-  winnerCallback: PropTypes.func.isRequired,
-  rollbackWinnerCallback: PropTypes.func.isRequired,
+  winnerCallback: PropTypes.func,
+  rollbackWinnerCallback: PropTypes.func,
   isWinner: PropTypes.bool
+};
+
+TeamButton.defaultProps = {
+  winnerCallback: (e) => {},
+  runnerUpCallback: (e) => {}
 };
