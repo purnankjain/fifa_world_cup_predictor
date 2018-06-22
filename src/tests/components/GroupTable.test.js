@@ -23,6 +23,25 @@ describe('GroupTable component test', () => {
     expect(rendered.findAllByType(TeamButton).length).toEqual(teams.length);
   });
 
+  it('should set member team button as winner on click', () => {
+    var group = TestUtils.renderIntoDocument(groupTableComponent);
+    var groupNode = ReactDOM.findDOMNode(group);
+
+    TestUtils.Simulate.click(groupNode.childNodes[1]);
+
+    expect(groupNode.getElementsByClassName(_WINNER_CLASS_NAME)[0].innerHTML).toEqual(teams[0]);
+  });
+
+  it('should rollback winner on click', () => {
+    var group = TestUtils.renderIntoDocument(groupTableComponent);
+    var groupNode = ReactDOM.findDOMNode(group);
+
+    TestUtils.Simulate.click(groupNode.childNodes[1]);
+    TestUtils.Simulate.click(groupNode.childNodes[1]);
+
+    expect(groupNode.getElementsByClassName(_WINNER_CLASS_NAME).length).toEqual(0);
+  });
+
   it('should have only one winner', () => {
     var group = TestUtils.renderIntoDocument(groupTableComponent);
     var groupNode = ReactDOM.findDOMNode(group);

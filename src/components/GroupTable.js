@@ -10,6 +10,7 @@ export default class GroupTable extends Component {
     };
     this.setGroupWinner = this.setGroupWinner.bind(this);
     this.rollbackGroupWinner = this.rollbackGroupWinner.bind(this);
+    this.handleTeamButtonClick = this.handleTeamButtonClick.bind(this);
   }
   setGroupWinner(e) {
     this.setState({ groupWinner: e.target.innerHTML });
@@ -20,8 +21,16 @@ export default class GroupTable extends Component {
   isTeamWinner(teamName) {
     return teamName === this.state.groupWinner;
   }
+  handleTeamButtonClick(e) {
+    // console.log(e.target.innerHTML);
+    if(this.state.groupWinner === e.target.innerHTML) {
+      this.setState({groupWinner: ''});
+    } else {
+      this.setState({groupWinner: e.target.innerHTML});
+    }
+  }
   render() {
-    var teamButtons = this.props.teams.map((team, index) => <TeamButton name={team} key={index} winnerCallback = {this.setGroupWinner} rollbackWinnerCallback={this.rollbackGroupWinner} isWinner={this.isTeamWinner(team)}/>);
+    var teamButtons = this.props.teams.map((team, index) => <TeamButton name={team} key={index} onClickCallback={this.handleTeamButtonClick} isWinner={this.isTeamWinner(team)}/>);
     return (<div>
       <h3>{this.props.name}</h3>
       {teamButtons}

@@ -24,26 +24,15 @@ describe('Team Button tests', () => {
     var rendered = renderer.create(teamButtonComponent).root;
     expect(rendered.findByType('div').props['className']).toEqual(_RUNNERUP_CLASS_NAME);
   });
-  it('should be clickable to set team as group winner', () => {
-    var winnerCallbackCount = 0;
-    var incrementWinnerCallbackCount = () => {winnerCallbackCount++};
-    var teamButtonComponent = (<TeamButton name={teamName} winnerCallback={incrementWinnerCallbackCount} />)
+  it('should be clickable', () => {
+    var onClickCallbackCount = 0;
+    var incrementOnClickCallback = () => {onClickCallbackCount++};
+    var teamButtonComponent = (<TeamButton name={teamName} onClickCallback={incrementOnClickCallback}/>);
     var teamButtonWinner = TestUtils.renderIntoDocument(teamButtonComponent);
     var teamButtonNode = ReactDOM.findDOMNode(teamButtonWinner);
 
     TestUtils.Simulate.click(teamButtonNode);
 
-    expect(winnerCallbackCount).toEqual(1);
-  });
-  it('should be clickable to rollback group winner', () => {
-    var rollbackWinnerCallbackCount = 0;
-    var incrementRollbackWinnerCallbackCount = () => {rollbackWinnerCallbackCount++};
-    var teamButtonComponent = (<TeamButton name={teamName} rollbackWinnerCallback={incrementRollbackWinnerCallbackCount} isWinner/>)
-    var teamButtonWinner = TestUtils.renderIntoDocument(teamButtonComponent);
-    var teamButtonNode = ReactDOM.findDOMNode(teamButtonWinner);
-
-    TestUtils.Simulate.click(teamButtonNode);
-
-    expect(rollbackWinnerCallbackCount).toEqual(1);
+    expect(onClickCallbackCount).toEqual(1);
   });
 });
