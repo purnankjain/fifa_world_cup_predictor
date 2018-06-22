@@ -5,12 +5,18 @@ import TestUtils from 'react-dom/test-utils';
 import TeamButton from '../../components/TeamButton';
 
 var teamName = "India";
+const _WINNER_CLASS_NAME = 'winner';
 
 describe('Team Button tests', () => {
   it('should render a box with team name', () => {
     var teamButtonComponent = (<TeamButton name={teamName} />)
     var rendered = renderer.create(teamButtonComponent).root;
     expect(rendered.findByType('div').children[0]).toEqual(teamName);
+  });
+  it('should render a winner team button', () => {
+    var teamButtonComponent = (<TeamButton name={teamName} isWinner/>);
+    var rendered = renderer.create(teamButtonComponent).root;
+    expect(rendered.findByType('div').props['className']).toEqual(_WINNER_CLASS_NAME);
   });
   it('should be clickable to set team as group winner', () => {
     var winnerCallbackCount = 0;
