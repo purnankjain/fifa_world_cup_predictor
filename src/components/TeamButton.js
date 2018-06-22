@@ -19,6 +19,7 @@ export default class TeamButton extends Component {
 
   render() {
     var styleClass = this.props.isWinner ? 'winner' : '';
+    var styleClass = this.props.isRunnerUp ? 'runnerUp' : styleClass;
     return (<div onClick={this.setWinner} className={styleClass} >{this.props.name}</div>);
   }
 }
@@ -27,7 +28,8 @@ TeamButton.propTypes = {
   name: PropTypes.string.isRequired,
   winnerCallback: PropTypes.func,
   rollbackWinnerCallback: PropTypes.func,
-  isWinner: PropTypes.bool
+  isWinner: PropTypes.bool,
+  isRunnerUp: PropTypes.bool,
 };
 
 TeamButton.defaultProps = {
