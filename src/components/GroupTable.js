@@ -6,27 +6,25 @@ export default class GroupTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      groupWinner : ''
+      groupWinners: []
     };
-    this.setGroupWinner = this.setGroupWinner.bind(this);
-    this.rollbackGroupWinner = this.rollbackGroupWinner.bind(this);
     this.handleTeamButtonClick = this.handleTeamButtonClick.bind(this);
   }
-  setGroupWinner(e) {
-    this.setState({ groupWinner: e.target.innerHTML });
-  }
-  rollbackGroupWinner() {
-    this.setState({ groupWinner: '' });
-  }
   isTeamWinner(teamName) {
-    return teamName === this.state.groupWinner;
+    return this.state.groupWinners.includes(teamName);
   }
   handleTeamButtonClick(e) {
-    // console.log(e.target.innerHTML);
-    if(this.state.groupWinner === e.target.innerHTML) {
-      this.setState({groupWinner: ''});
+    if(this.state.groupWinners.includes(e.target.innerHTML)) {
+      let { groupWinners } = this.state;
+      let index = groupWinners.indexOf(e.target.innerHTML);
+      groupWinners.splice(index, 1);
+      this.setState({ groupWinners: groupWinners });
     } else {
-      this.setState({groupWinner: e.target.innerHTML});
+      if(this.state.groupWinners.length < this.props.winnerCount) {
+        let { groupWinners } = this.state;
+        groupWinners.push(e.target.innerHTML);
+        this.setState({ groupWinners: groupWinners });
+      }
     }
   }
   render() {
@@ -40,5 +38,10 @@ export default class GroupTable extends Component {
 
 GroupTable.propTypes = {
   name : PropTypes.string.isRequired,
-  teams : PropTypes.arrayOf(PropTypes.string).isRequired
-}
+  teams : PropTypes.arrayOf(PropTypes.string).isRequired,
+  winnerCount : PropTypes.number
+};
+
+GroupTable.defaultProps = {
+  winnerCount : 1
+};

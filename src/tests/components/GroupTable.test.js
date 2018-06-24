@@ -29,6 +29,7 @@ describe('GroupTable component test', () => {
 
     TestUtils.Simulate.click(groupNode.childNodes[1]);
 
+    expect(groupNode.getElementsByClassName(_WINNER_CLASS_NAME).length).toEqual(1);
     expect(groupNode.getElementsByClassName(_WINNER_CLASS_NAME)[0].innerHTML).toEqual(teams[0]);
   });
 
@@ -48,9 +49,23 @@ describe('GroupTable component test', () => {
 
     TestUtils.Simulate.click(groupNode.childNodes[1]);
     TestUtils.Simulate.click(groupNode.childNodes[2]);
-    TestUtils.Simulate.click(groupNode.childNodes[3]);
 
     expect(groupNode.getElementsByClassName(_WINNER_CLASS_NAME).length).toEqual(1);
-    expect(groupNode.getElementsByClassName(_WINNER_CLASS_NAME)[0].innerHTML).toEqual(teams[2]);
+    expect(groupNode.getElementsByClassName(_WINNER_CLASS_NAME)[0].innerHTML).toEqual(teams[0]);
+  });
+
+  it('should have 2 winners when groupTable is made for 2 winners', () => {
+    var winnerCount = 2;
+    var groupTableComponent = <GroupTable name={groupName} teams={teams} winnerCount={winnerCount}/>;
+    var group = TestUtils.renderIntoDocument(groupTableComponent);
+    var groupNode = ReactDOM.findDOMNode(group);
+
+    TestUtils.Simulate.click(groupNode.childNodes[1]);
+    TestUtils.Simulate.click(groupNode.childNodes[2]);
+    TestUtils.Simulate.click(groupNode.childNodes[3]);
+
+    expect(groupNode.getElementsByClassName(_WINNER_CLASS_NAME).length).toEqual(2);
+    expect(groupNode.getElementsByClassName(_WINNER_CLASS_NAME)[0].innerHTML).toEqual(teams[0]);
+    expect(groupNode.getElementsByClassName(_WINNER_CLASS_NAME)[1].innerHTML).toEqual(teams[1]);
   });
 });

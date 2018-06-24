@@ -6,10 +6,8 @@ export default class TeamButton extends Component {
   constructor(props) {
     super(props);
   }
-
   render() {
     var styleClass = this.props.isWinner ? 'winner' : '';
-    styleClass = this.props.isRunnerUp ? 'runnerUp' : styleClass;
     return (<div onClick={this.props.onClickCallback} className={styleClass} >{this.props.name}</div>);
   }
 }
@@ -17,8 +15,7 @@ export default class TeamButton extends Component {
 TeamButton.propTypes = {
   name: PropTypes.string.isRequired,
   onClickCallback: PropTypes.func,
-  isWinner: PropTypes.bool,
-  isRunnerUp: PropTypes.bool
+  isWinner: PropTypes.bool
 };
 
 TeamButton.defaultProps = {

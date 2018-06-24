@@ -6,7 +6,6 @@ import TeamButton from '../../components/TeamButton';
 
 var teamName = "India";
 const _WINNER_CLASS_NAME = 'winner';
-const _RUNNERUP_CLASS_NAME = 'runnerUp';
 
 describe('Team Button tests', () => {
   it('should render a box with team name', () => {
@@ -18,11 +17,6 @@ describe('Team Button tests', () => {
     var teamButtonComponent = (<TeamButton name={teamName} isWinner/>);
     var rendered = renderer.create(teamButtonComponent).root;
     expect(rendered.findByType('div').props['className']).toEqual(_WINNER_CLASS_NAME);
-  });
-  it('should render a runner up team button', () => {
-    var teamButtonComponent = (<TeamButton name={teamName} isRunnerUp/>);
-    var rendered = renderer.create(teamButtonComponent).root;
-    expect(rendered.findByType('div').props['className']).toEqual(_RUNNERUP_CLASS_NAME);
   });
   it('should be clickable', () => {
     var onClickCallbackCount = 0;

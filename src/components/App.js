@@ -5,7 +5,7 @@ import GroupTable from './GroupTable';
 class App extends Component {
   render() {
     return (<div>
-      <GroupTable name={'Group A'} teams={['India', 'Austr', 'West']}/>
+      <GroupTable name={'Group A'} teams={['India', 'Austr', 'West']} winnerCount={2}/>
       <GroupTable name={'Group B'} teams={['Brazil', 'Arg', 'Chile']}/>
       <GroupTable name={'Group C'} teams={['USA', 'Canada', 'England']}/>
     </div>);
