@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TeamButton from './TeamButton';
 import PropTypes from 'prop-types';
+import Team from '../library/Team';
 
 export default class GroupTable extends Component {
   constructor(props) {
@@ -10,25 +11,13 @@ export default class GroupTable extends Component {
     };
     this.handleTeamButtonClick = this.handleTeamButtonClick.bind(this);
   }
-  isTeamWinner(teamName) {
-    return this.state.groupWinners.includes(teamName);
-  }
   handleTeamButtonClick(e) {
-    if(this.state.groupWinners.includes(e.target.innerHTML)) {
-      let { groupWinners } = this.state;
-      let index = groupWinners.indexOf(e.target.innerHTML);
-      groupWinners.splice(index, 1);
-      this.setState({ groupWinners: groupWinners });
-    } else {
-      if(this.state.groupWinners.length < this.props.winnerCount) {
-        let { groupWinners } = this.state;
-        groupWinners.push(e.target.innerHTML);
-        this.setState({ groupWinners: groupWinners });
-      }
-    }
+    let teamName = e.target.innerHTML;
+    this.setState((prevState, props) => { return { groupWinners: Team.updateGroupWinner(teamName, prevState.groupWinners, props.winnerCount)}}, () => { this.props.winnerUpdateCallback(this.state.groupWinners); });
   }
   render() {
-    var teamButtons = this.props.teams.map((team, index) => <TeamButton name={team} key={index} onClickCallback={this.handleTeamButtonClick} isWinner={this.isTeamWinner(team)}/>);
+    var { groupWinners } = this.state;
+    var teamButtons = this.props.teams.map((team, index) => <TeamButton name={team} key={index} onClickCallback={this.handleTeamButtonClick} isWinner={Team.isWinner(groupWinners, team)}/>);
     return (<div>
       <h3>{this.props.name}</h3>
       {teamButtons}
@@ -39,9 +28,11 @@ export default class GroupTable extends Component {
 GroupTable.propTypes = {
   name : PropTypes.string.isRequired,
   teams : PropTypes.arrayOf(PropTypes.string).isRequired,
-  winnerCount : PropTypes.number
+  winnerCount : PropTypes.number,
+  winnerUpdateCallback: PropTypes.func
 };
 
 GroupTable.defaultProps = {
-  winnerCount : 1
+  winnerCount : 1,
+  winnerUpdateCallback: () => {}
 };

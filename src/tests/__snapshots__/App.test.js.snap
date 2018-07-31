@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Tests renders without crashing 1`] = `
+<div>
+  <div>
+    <h3>
+      Group A
+    </h3>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      India
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      Austr
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      West
+    </div>
+  </div>
+  <div>
+    <h3>
+      Group B
+    </h3>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      Brazil
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      Arg
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      Chile
+    </div>
+  </div>
+  <div>
+    <h3>
+      Group C
+    </h3>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      USA
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      Canada
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      England
+    </div>
+  </div>
+</div>
+`;

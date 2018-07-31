@@ -68,4 +68,16 @@ describe('GroupTable component test', () => {
     expect(groupNode.getElementsByClassName(_WINNER_CLASS_NAME)[0].innerHTML).toEqual(teams[0]);
     expect(groupNode.getElementsByClassName(_WINNER_CLASS_NAME)[1].innerHTML).toEqual(teams[1]);
   });
+
+  it('should make a callback on winner update', () => {
+    var winnerUpdateCallbackCount = 0;
+    var winnerUpdateCallback = () => { winnerUpdateCallbackCount++ };
+    var groupTableComponent = <GroupTable name={groupName} teams={teams} winnerUpdateCallback={winnerUpdateCallback}/>;
+    var group = TestUtils.renderIntoDocument(groupTableComponent);
+    var groupNode = ReactDOM.findDOMNode(group);
+
+    TestUtils.Simulate.click(groupNode.childNodes[1]);
+
+    expect(winnerUpdateCallbackCount).toEqual(1);
+  });
 });
